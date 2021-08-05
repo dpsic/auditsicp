@@ -1,4 +1,4 @@
-package com.example.projet.dao;
+package com.example.projet.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
