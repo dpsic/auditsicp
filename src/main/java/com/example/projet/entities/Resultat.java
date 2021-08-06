@@ -1,17 +1,17 @@
 package com.example.projet.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Resultat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private boolean reference;
+    private boolean cotation;
     private String methode;
+    @ManyToOne
+    @JoinColumn(name = "ID_EVA")
+    private Evaluation evaluation;
 
     public Long getId() {
         return id;
@@ -21,12 +21,12 @@ public class Resultat {
         this.id = id;
     }
 
-    public boolean isReference() {
-        return reference;
+    public boolean isCotation() {
+        return cotation;
     }
 
-    public void setReference(boolean reference) {
-        this.reference = reference;
+    public void setCotation(boolean cotation) {
+        this.cotation = cotation;
     }
 
     public String getMethode() {
@@ -37,12 +37,11 @@ public class Resultat {
         this.methode = methode;
     }
 
-    public Resultat() {
+    public Evaluation getEvaluation() {
+        return evaluation;
     }
 
-    public Resultat(Long id, boolean reference, String methode) {
-        this.id = id;
-        this.reference = reference;
-        this.methode = methode;
+    public void setEvaluation(Evaluation evaluation) {
+        this.evaluation = evaluation;
     }
 }
