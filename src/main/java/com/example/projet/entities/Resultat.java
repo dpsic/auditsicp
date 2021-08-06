@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Resultat {
@@ -12,6 +14,9 @@ public class Resultat {
     private Long id;
     private boolean reference;
     private String methode;
+    @ManyToOne
+    @JoinColumn(name = "ID_EVA")
+    private Evaluation evaluation;
 
     public Long getId() {
         return id;
