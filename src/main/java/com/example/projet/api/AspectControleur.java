@@ -1,9 +1,7 @@
 package com.example.projet.api;
 
 import com.example.projet.entities.Aspect;
-import com.example.projet.entities.Evaluation;
 import com.example.projet.services.AspectServices;
-import com.example.projet.services.EvaluationSer;
 import com.example.projet.services.MapVAlidationErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,11 +21,13 @@ public class AspectControleur {
     AspectServices aspectServices;
     @Autowired
     MapVAlidationErrorService mapVAlidationErrorService;
+
     @PostMapping("")
-    public ResponseEntity<?> save(@Valid @RequestBody Aspect aspect, BindingResult result){
+    public ResponseEntity<?> save(@Valid @RequestBody Aspect aspect, BindingResult result) {
         ResponseEntity<?> errorMap = mapVAlidationErrorService.MapValidationService(result);
-        if(errorMap != null) return errorMap;
-        Aspect aspect1=aspectServices.save(aspect);
+        if (errorMap != null)
+            return errorMap;
+        Aspect aspect1 = aspectServices.save(aspect);
         return new ResponseEntity<Aspect>(aspect1, HttpStatus.OK);
     }
 }

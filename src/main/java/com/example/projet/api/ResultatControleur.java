@@ -1,9 +1,7 @@
 package com.example.projet.api;
 
-import com.example.projet.entities.Recommandation;
 import com.example.projet.entities.Resultat;
 import com.example.projet.services.MapVAlidationErrorService;
-import com.example.projet.services.RecommandationServices;
 import com.example.projet.services.ResultatServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,12 +21,13 @@ public class ResultatControleur {
     ResultatServices resultatServices;
     @Autowired
     MapVAlidationErrorService mapVAlidationErrorService;
+
     @PostMapping("")
-    public ResponseEntity<?> save(@Valid @RequestBody Resultat resultat, BindingResult result){
+    public ResponseEntity<?> save(@Valid @RequestBody Resultat resultat, BindingResult result) {
         ResponseEntity<?> errorMap = mapVAlidationErrorService.MapValidationService(result);
-        if(errorMap != null) return errorMap;
-        Resultat resultat1=resultatServices.save(resultat);
+        if (errorMap != null)
+            return errorMap;
+        Resultat resultat1 = resultatServices.save(resultat);
         return new ResponseEntity<Resultat>(resultat1, HttpStatus.OK);
     }
 }
-
