@@ -9,9 +9,9 @@ public class Recommandation {
     private Long id;
     private String reference;
     private String label;
-    @ManyToOne
-    @JoinColumn(name = "ID_RES")
-    private Resultat resultat;
+    // @ManyToOne
+    // @JoinColumn(name = "ID_RES")
+    // private Resultat resultat;
     @ManyToOne
     @JoinColumn(name = "ID_ASP")
     private Aspect aspect;
@@ -52,20 +52,6 @@ public class Recommandation {
      */
     public void setId(Long id) {
         this.id = id;
-    }
-
-    /**
-     * @return Resultat return the resultat
-     */
-    public Resultat getResultat() {
-        return resultat;
-    }
-
-    /**
-     * @param resultat the resultat to set
-     */
-    public void setResultat(Resultat resultat) {
-        this.resultat = resultat;
     }
 
     /**

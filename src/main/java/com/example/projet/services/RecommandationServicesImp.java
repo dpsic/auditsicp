@@ -7,17 +7,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RecommandationServicesImp implements RecommandationServices{
+public class RecommandationServicesImp implements RecommandationServices {
     @Autowired
     RecommandationRepo recommandationRepo;
+
     @Override
     public Recommandation save(Recommandation recommandation) {
-        try{
+        try {
             return recommandationRepo.save(recommandation);
-        }
-        catch(Exception ex)
+        } catch (Exception ex)
 
         {
             throw new LibbeleException("Erreur Fatale");
-        }}
+        }
+    }
+
+    @Override
+    public Recommandation findByReference(String ref) {
+        // TODO Auto-generated method stub
+        return recommandationRepo.findByReference(ref);
+    }
+
 }

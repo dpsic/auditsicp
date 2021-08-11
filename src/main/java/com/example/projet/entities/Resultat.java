@@ -12,6 +12,9 @@ public class Resultat {
     @ManyToOne
     @JoinColumn(name = "ID_EVA")
     private Evaluation evaluation;
+    @ManyToOne
+    @JoinColumn(name = "ID_RECO")
+    private Recommandation recommandation;
 
     public Long getId() {
         return id;
@@ -44,4 +47,19 @@ public class Resultat {
     public void setEvaluation(Evaluation evaluation) {
         this.evaluation = evaluation;
     }
+
+    /**
+     * @return Recommandation return the recommandation
+     */
+    public Recommandation getRecommandation() {
+        return recommandation;
+    }
+
+    /**
+     * @param recommandation the recommandation to set
+     */
+    public void setRecommandation(Recommandation recommandation) {
+        this.recommandation = recommandation;
+    }
+
 }

@@ -18,13 +18,13 @@ public class Evaluation {
     @JsonFormat(pattern = "dd-mm-yyyy")
     private Date dateValidation;
     @NotNull(message = "Champ Obligatoire")
-    private String organ;
+    private String organe;
     @NotNull(message = "Champ Obligatoire")
     private String auteur;
     @NotNull(message = "Champ Obligatoire")
     private String validation;
     @OneToMany(mappedBy = "evaluation")
-    private List<Resultat> resultat=new ArrayList<>();
+    private List<Resultat> resultat = new ArrayList<>();
 
     /**
      * @return Long return the id
@@ -69,17 +69,17 @@ public class Evaluation {
     }
 
     /**
-     * @return String return the organ
+     * @return String return the organe
      */
-    public String getOrgan() {
-        return organ;
+    public String getOrgane() {
+        return organe;
     }
 
     /**
-     * @param organ the organ to set
+     * @param organe the organe to set
      */
-    public void setOrgan(String organ) {
-        this.organ = organ;
+    public void setOrgane(String organe) {
+        this.organe = organe;
     }
 
     /**

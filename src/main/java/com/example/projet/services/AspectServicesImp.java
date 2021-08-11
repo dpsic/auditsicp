@@ -21,4 +21,10 @@ public class AspectServicesImp implements AspectServices {
             throw new LibbeleException("Erreur Fatale");
         }
     }
+
+    @Override
+    public Aspect findById(Long id) {
+        // TODO Auto-generated method stub
+        return aspectRepo.findById(id).get();
+    }
 }
