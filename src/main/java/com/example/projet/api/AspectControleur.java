@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/aspects")
+@RequestMapping("/api/eva/aspects")
 public class AspectControleur {
     @Autowired
     AspectServices aspectServices;

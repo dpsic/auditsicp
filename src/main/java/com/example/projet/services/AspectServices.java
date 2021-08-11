@@ -6,4 +6,5 @@ public interface AspectServices {
     Aspect save(Aspect eval);
 
     Aspect findById(Long id);
+    
 }

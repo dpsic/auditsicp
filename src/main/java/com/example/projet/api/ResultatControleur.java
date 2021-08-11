@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/resultats")
+@RequestMapping("/api/eva/resultats")
 public class ResultatControleur {
     @Autowired
     ResultatServices resultatServices;
