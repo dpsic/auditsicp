@@ -3,9 +3,9 @@ package com.example.projet.excel;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 import java.util.Iterator;
 
@@ -27,7 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class ExcelHelper {
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
     static String[] HEADERs = { "reference", "recommandations", "cotation", "methode" };
-    static String SHEET = "procedural";
+    static String SHEET = "aspc";
     @Autowired
     RecommandationServices recoScv;
     @Autowired
@@ -50,6 +50,7 @@ public class ExcelHelper {
             Iterator<Row> rows = sheet.iterator();
 
             List<Recommandation> tutorials = new ArrayList<Recommandation>();
+           
             int i = 1;
             int rowNumber = 0;
             while (rows.hasNext()) {
@@ -65,7 +66,7 @@ public class ExcelHelper {
                 Iterator<Cell> cellsInRow = currentRow.iterator();
 
                 Recommandation reco = new Recommandation();
-                Aspect asp = asSvc.findById(1L);
+                Aspect asp = asSvc.findById(6L);
                 reco.setAspect(asp);
 
                 int cellIdx = 0;
