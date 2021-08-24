@@ -1,12 +1,13 @@
 package com.example.projet.entities;
 
+import com.example.projet.modals.Organe;
+import com.example.projet.modals.Personnel;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+
 
 @Entity
 public class Evaluation {
@@ -17,14 +18,58 @@ public class Evaluation {
     private Date dateEvaluation;
     @JsonFormat(pattern = "dd-mm-yyyy")
     private Date dateValidation;
-    @NotNull(message = "Champ Obligatoire")
-    private String organe;
-    @NotNull(message = "Champ Obligatoire")
-    private String auteur;
+    private String validateur;
     @NotNull(message = "Champ Obligatoire")
     private String validation;
-    @OneToMany(mappedBy = "evaluation")
-    private List<Resultat> resultat = new ArrayList<>();
+  
+    private Long evaluateurID;
+    private Long organeID;
+    @Transient
+    private Organe organe;
+    @Transient
+    private Personnel personnel;
+
+
+    public String getValidateur() {
+        return validateur;
+    }
+
+    public void setValidateur(String validateur) {
+        this.validateur = validateur;
+    }
+
+    public Long getEvaluateurID() {
+        return evaluateurID;
+    }
+
+    public void setEvaluateurID(Long evaluateurID) {
+        this.evaluateurID = evaluateurID;
+    }
+
+    public Personnel getPersonnel() {
+        return personnel;
+    }
+
+    public void setPersonnel(Personnel personnel) {
+        this.personnel = personnel;
+    }
+
+    public Organe getOrgane() {
+        return organe;
+    }
+
+    public void setOrgane(Organe organe) {
+        this.organe = organe;
+    }
+
+ 
+    public Long getOrganeID() {
+        return organeID;
+    }
+
+    public void setOrganeID(Long organeID) {
+        this.organeID = organeID;
+    }
 
     /**
      * @return Long return the id
@@ -68,47 +113,8 @@ public class Evaluation {
         this.dateValidation = dateValidation;
     }
 
-    /**
-     * @return String return the organe
-     */
-    public String getOrgane() {
-        return organe;
-    }
+ 
 
-    /**
-     * @param organe the organe to set
-     */
-    public void setOrgane(String organe) {
-        this.organe = organe;
-    }
-
-    /**
-     * @return String return the auteur
-     */
-    public String getAuteur() {
-        return auteur;
-    }
-
-    /**
-     * @param auteur the auteur to set
-     */
-    public void setAuteur(String auteur) {
-        this.auteur = auteur;
-    }
-
-    /**
-     * @return List<Resultat> return the resultat
-     */
-    public List<Resultat> getResultat() {
-        return resultat;
-    }
-
-    /**
-     * @param resultat the resultat to set
-     */
-    public void setResultat(List<Resultat> resultat) {
-        this.resultat = resultat;
-    }
 
     public Evaluation() {
     }

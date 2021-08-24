@@ -2,6 +2,8 @@ package com.example.projet.entities;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 public class Resultat {
     @Id
@@ -11,6 +13,7 @@ public class Resultat {
     private String methode;
     @ManyToOne
     @JoinColumn(name = "ID_EVA")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Evaluation evaluation;
     @ManyToOne
     @JoinColumn(name = "ID_RECO")

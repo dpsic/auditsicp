@@ -9,10 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
 
-import com.example.projet.entities.Aspect;
-import com.example.projet.entities.Recommandation;
+
+import com.example.projet.entities.Resultat;
 import com.example.projet.services.AspectServices;
 import com.example.projet.services.RecommandationServices;
+import com.example.projet.services.ResultatServices;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -27,12 +28,13 @@ import org.springframework.web.multipart.MultipartFile;
 public class ExcelHelper {
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
     static String[] HEADERs = { "reference", "recommandations", "cotation", "methode" };
-    static String SHEET = "aspc";
+    static String SHEET = "result";
     @Autowired
     RecommandationServices recoScv;
     @Autowired
     AspectServices asSvc;
-
+    @Autowired
+    ResultatServices rSVC;
     public static boolean hasExcelFormat(MultipartFile file) {
 
         if (!TYPE.equals(file.getContentType())) {
@@ -42,14 +44,14 @@ public class ExcelHelper {
         return true;
     }
 
-    public List<Recommandation> excelToTutorials(InputStream is) throws ParseException {
+    public List<Resultat> excelToTutorials(InputStream is) throws ParseException {
         try {
             Workbook workbook = new XSSFWorkbook(is);
 
             Sheet sheet = workbook.getSheet(SHEET);
             Iterator<Row> rows = sheet.iterator();
 
-            List<Recommandation> tutorials = new ArrayList<Recommandation>();
+            List<Resultat> tutorials = new ArrayList<Resultat>();
            
             int i = 1;
             int rowNumber = 0;
@@ -65,10 +67,8 @@ public class ExcelHelper {
 
                 Iterator<Cell> cellsInRow = currentRow.iterator();
 
-                Recommandation reco = new Recommandation();
-                Aspect asp = asSvc.findById(6L);
-                reco.setAspect(asp);
-
+                Resultat reco = new Resultat();
+               
                 int cellIdx = 0;
                 while (cellsInRow.hasNext()) {
                     Cell currentCell = cellsInRow.next();
@@ -77,18 +77,23 @@ public class ExcelHelper {
                     case 0:
                         String reference = currentCell.getStringCellValue();
                         System.out.println(reference);
-                        reco.setReference(reference);
+                        reco.setRecommandation(recoScv.findByReference(reference));
                         break;
 
                     case 1:
-                        String auteur = currentCell.getStringCellValue();
-                        System.out.println(auteur);
-                        reco.setLabel(auteur);
+                        double cotation = currentCell.getNumericCellValue();
+                        System.out.println(cotation);
+                        if (cotation==1) {
+                            reco.setCotation(true);
+                        } else {
+                            reco.setCotation(false);
+                        }
                         break;
-                    // case 2:
-                    // String sDate1 = currentCell.getStringCellValue();
-                    // System.out.println(sDate1);
-                    // break;
+                    case 2:
+                    String methode = currentCell.getStringCellValue();
+                    System.out.println(methode);
+                    reco.setMethode(methode);
+                    break;
                     // case 3:
                     // String descriptif = currentCell.getStringCellValue();
                     // System.out.println(descriptif);

@@ -15,19 +15,19 @@ import org.springframework.web.multipart.MultipartFile;
 
 // @CrossOrigin("http://localhost:8081")
 @Controller
-@RequestMapping("/api/excel")
+@RequestMapping("/api/eva/excel")
 public class ExcelController {
 
     @Autowired
     ExcelService fileService;
 
-    @PostMapping("/upload")
+    @PostMapping("")
     public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) throws ParseException {
         String message = "";
 
         if (ExcelHelper.hasExcelFormat(file)) {
             // try {
-            fileService.save(file);
+            fileService.save(file,2L);
 
             message = "Uploaded the file successfully: " + file.getOriginalFilename();
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));

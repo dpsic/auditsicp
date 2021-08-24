@@ -8,10 +8,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -22,6 +25,8 @@ public class EvaluationControleur {
     EvaluationSer evaluationSer;
     @Autowired
     MapVAlidationErrorService mapVAlidationErrorService;
+   
+
     @PostMapping("")
     public ResponseEntity<?> save(@Valid @RequestBody Evaluation evaluation, BindingResult result){
         ResponseEntity<?> errorMap = mapVAlidationErrorService.MapValidationService(result);
@@ -29,8 +34,13 @@ public class EvaluationControleur {
         Evaluation eva=evaluationSer.save(evaluation);
         return new ResponseEntity<Evaluation>(eva, HttpStatus.OK);
     }
-    @GetMapping("")
-    public String hello(){
-        return "Hello";
+    @GetMapping("/{id}")
+    public Evaluation getEvaById(@PathVariable Long id){
+        return evaluationSer.getByID(id) ;
     }
+    @GetMapping("")
+    public List<Evaluation> geALL(){
+        return evaluationSer.getAll();
+    }
+    
 }
