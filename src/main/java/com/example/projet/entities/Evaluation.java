@@ -5,23 +5,24 @@ import com.example.projet.modals.Personnel;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.Date;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Evaluation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @JsonFormat(pattern = "dd-mm-yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dateEvaluation;
-    @JsonFormat(pattern = "dd-mm-yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dateValidation;
     private String validateur;
-    @NotNull(message = "Champ Obligatoire")
-    private String validation;
-  
+
+    @OneToMany(mappedBy = "evaluation")
+    private List<Resultat> resultat = new ArrayList<>();
     private Long evaluateurID;
     private Long organeID;
     @Transient
@@ -115,22 +116,23 @@ public class Evaluation {
 
  
 
+    /**
+     * @return List<Resultat> return the resultat
+     */
+    public List<Resultat> getResultat() {
+        return resultat;
+    }
+
+    /**
+     * @param resultat the resultat to set
+     */
+    public void setResultat(List<Resultat> resultat) {
+        this.resultat = resultat;
+    }
 
     public Evaluation() {
     }
 
-    /**
-     * @return String return the validation
-     */
-    public String getValidation() {
-        return validation;
-    }
 
-    /**
-     * @param validation the validation to set
-     */
-    public void setValidation(String validation) {
-        this.validation = validation;
-    }
 
 }

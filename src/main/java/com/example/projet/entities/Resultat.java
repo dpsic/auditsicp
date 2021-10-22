@@ -18,6 +18,14 @@ public class Resultat {
     @ManyToOne
     @JoinColumn(name = "ID_RECO")
     private Recommandation recommandation;
+    private Boolean active=true;
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
 
     public Long getId() {
         return id;

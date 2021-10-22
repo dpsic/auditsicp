@@ -94,15 +94,6 @@ public class ExcelHelper {
                     System.out.println(methode);
                     reco.setMethode(methode);
                     break;
-                    // case 3:
-                    // String descriptif = currentCell.getStringCellValue();
-                    // System.out.println(descriptif);
-                    // break;
-
-                    // case 4:
-                    // String theme = currentCell.getStringCellValue();
-                    // System.out.println(theme);
-                    // break;
 
                     default:
                         break;
@@ -110,7 +101,7 @@ public class ExcelHelper {
 
                     cellIdx++;
                 }
-                i++;
+                i=i+1;
                 tutorials.add(reco);
             }
 

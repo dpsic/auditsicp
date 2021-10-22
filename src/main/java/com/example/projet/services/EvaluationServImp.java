@@ -24,16 +24,14 @@ public class EvaluationServImp implements EvaluationSer{
     PersonnelRestClient pRestClient;
     @Override
     public Evaluation save(Evaluation eval) {
-        try{
-           eval.setEvaluateurID(eval.getPersonnel().getId()); 
-           eval.setOrganeID(eval.getOrgane().getId());
+        
+          
             return evaluationRepo.save(eval);
-    }
-        catch(Exception ex)
 
-    {
-        throw new LibbeleException("Erreur Fatale");
-    }}
+     
+
+    
+}
     @Override
     public Evaluation getByID(Long id) {
         // TODO Auto-generated method stub
